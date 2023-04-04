@@ -38,6 +38,8 @@ class GoogleSheet_to_FireBase(Resource):
         }
         db.collection(u'Test').document(Product_Code).set(obj,merge=True)
         return {"data" : data,"result" : "Add data to FireBase Success."}
+    def get(self):
+        return {"data" : "Hello world!!"}
 
 class Ship_Product_to_Customer(Resource):
     def post(self,Product_Code,Day_left,Hour_Left,Min_Left):
@@ -49,13 +51,12 @@ class Ship_Product_to_Customer(Resource):
         }
         db.collection(u'Product').document(Product_Code).set(obj,merge=True)
         return {"data" : data,"result" : "Add data to FireBase Success."}
-    def get(self):
-        return {"data" : "Hello world!!"}
+
 
 
 #call
 api.add_resource(Auction_GoogleSheet,"/auction/<int:Product_Code>/<string:Date>/<string:Time>/<int:Hour_Auction>")
-api.add_resource(GoogleSheet_to_FireBase,"/GsToFb/<string:Product_Code>/<string:Day_left>/<string:Hour_Left>/<string:Min_Left>")
-
+#api.add_resource(GoogleSheet_to_FireBase,"/GsToFb/<string:Product_Code>/<string:Day_left>/<string:Hour_Left>/<string:Min_Left>")
+api.add_resource(GoogleSheet_to_FireBase,"/GsToFb")
 if __name__ == "__main__":
     app.run(debug=False,host='0.0.0.0')
